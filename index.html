@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto" rel="stylesheet">
+    <style>
+      body {
+        background-color: rgb(17, 17, 17);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        margin-top: 0;
+        transform: rotate(-8deg)
+      }
+
+      #container {
+        color: rgb(217, 217, 217);
+        font-family: 'Lobster';
+        font-size: 4vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #timer {
+        font-family: 'Roboto';
+        font-size: 7vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Next Metrics daily</h1>
+      <div id="timer"></div>
+    </div>
+    <script>
+      var timerEl = document.querySelector('#timer');
+      var containerEl = document.querySelector('#container');
+
+      setInterval(function() {
+
+        var now = new Date();
+        var nextDaily = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 30);
+        if (now.getHours() > 12) {
+          nextDaily.setDate(now.getDate() + 1)
+        }
+        var timer = new Date(nextDaily.getTime() - now.getTime() - (1 * 60 * 60 * 1000));
+        console.log('now', timer)
+
+        timerEl.innerHTML = `${ timer.getHours() }:${ timer.getMinutes() }:${ timer.getSeconds() }:${ Math.trunc(timer.getMilliseconds() / 100) }`;
+
+        if (timer.getHours() < 1 && timer.getMinutes() < 5) {
+          containerEl.style.color = '#960101';
+          timerEl.style.color = '#960101';
+        } else if (timer.getHours() < 1 && timer.getMinutes() <= 10) {
+          containerEl.style.color = '#c74102';
+          timerEl.style.color = '#c74102';
+        } else {
+          // default class values
+          containerEl.style.color = '';
+          timerEl.style.color = '';
+        }
+      }, 50);
+    </script>
+  </body>
+</html>
