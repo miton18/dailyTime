@@ -32,13 +32,17 @@
   </head>
   <body>
     <div id="container">
-      <h1>Next Metrics daily</h1>
+      <h1 id="title"></h1>
       <div id="timer"></div>
     </div>
     <script>
       var timerEl = document.querySelector('#timer')
       var containerEl = document.querySelector('#container')
       let body = document.querySelector('body')
+      let url = new URL(window.location)
+      let name = url.searchParams.get('name')
+
+      document.querySelector('#title').innerHTML = `Next ${ name } daily`
 
       setInterval(function() {
 
