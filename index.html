@@ -64,7 +64,7 @@
 
         timerEl.innerHTML = `${ h }:${ m }:${ s }`
 
-        if (timer.getHours() === 0 && timer.getMinutes() === 0 && timer.getSeconds() === 0){
+        if (timer.getHours() === 0 && timer.getMinutes() === 0 && timer.getSeconds() <= 1){
           troll()
         }
 
@@ -104,7 +104,7 @@
 
           setTimeout(() => {
             document.querySelector('#gif').remove()
-          }, 5 * 60 * 1000)
+          }, 10 * 60 * 1000)
         })
       }
     </script>
